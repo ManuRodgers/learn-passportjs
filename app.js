@@ -5,9 +5,12 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const passportSetup = require("./config/passport-setup");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
 
 // routes
 const authRoutes = require("./routes/authRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 
 const app = express();
 
@@ -18,6 +21,16 @@ mongoose.connect(
   }
 );
 
+app.use(
+  cookieSession({
+    maxAge: 1000 * 60 * 60 * 24,
+    keys: [keys.session.cookieKey]
+  })
+);
+// passport session
+app.use(passport.initialize());
+app.use(passport.session());
+
 // assign the ejs engine to .html files
 app.engine("html", consolidate.ejs);
 
@@ -26,6 +39,7 @@ app.set("view engine", "html");
 app.set("views", path.resolve(__dirname, "views/"));
 
 app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
 
 app.get("/", (req, res) => {
   res.render("home.ejs");

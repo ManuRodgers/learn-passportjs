@@ -7,5 +7,8 @@ module.exports = {
   mongodb: {
     mongodbURL:
       "mongodb://passportjs:passport123@ds014388.mlab.com:14388/manurodgers-passportjs"
+  },
+  session: {
+    cookieKey: "manurodgersgoat"
   }
 };
