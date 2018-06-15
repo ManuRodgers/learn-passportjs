@@ -11,6 +11,8 @@ authRouter.get("/logout", (req, res) => {
   // handle with passport
   res.send("logging out");
 });
+
+
 // auth with google+
 authRouter.get(
   "/google",
@@ -30,7 +32,8 @@ authRouter.get(
     }
   },
   (req, res) => {
-    res.redirect("/");
+    // res.send(req.user);
+    res.redirect("/profile/");
   }
 );
 
