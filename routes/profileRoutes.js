@@ -10,7 +10,7 @@ const authCheck = (req, res, next) => {
   }
 };
 profileRouter.get("/", authCheck, (req, res) => {
-  res.send(`you logged in ${req.user.username}`);
+  res.render("profile.ejs", { user: req.user });
 });
 
 module.exports = profileRouter;

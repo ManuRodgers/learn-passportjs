@@ -42,7 +42,7 @@ app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
 app.get("/", (req, res) => {
-  res.render("home.ejs");
+  res.render("home.ejs", { user: req.user });
 });
 
 app.listen(5000, () => {
